@@ -4,10 +4,16 @@ $(function(){
 // ui
   $("form").submit(function(e){
     e.preventDefault();
-    $("ul").empty()
-    pingOrPong( $("input").val() );
+
+    pingPongs = pingOrPong( $("input").val() );
 
     //put pingpong output into ^^
+    $("ul").empty()
+    for ( i =  0 ; i < pingPongs.length; i++){
+      $("ul").append('<li > </li>');
+      $("li:last").text(pingPongs[i])
+    }
+
   });
 
 
@@ -30,13 +36,18 @@ $(function(){
     }
 
 
-  // for every li made, put a new results[i] in it, targets just the last li
-    for ( i =  0 ; i < result.length; i++){
-      $("ul").append('<li > </li>');
-      $("li:last").text(result[i])
-    }
+    return result
 
-    //should ^^ be in business or ui logic?
+
+  // for every li made, put a new results[i] in it, targets just the last li
+
+  $("ul").empty()
+  for ( i =  0 ; i < pingPongs.length; i++){
+    $("ul").append('<li > </li>');
+    $("li:last").text(pingPongs[i])
+  }
+
+  //should ^^ be in business or ui logic?
 
 
 
