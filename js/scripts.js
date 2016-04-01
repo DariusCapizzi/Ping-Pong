@@ -14,14 +14,14 @@ $(function() {
       return;
     }
 
-    console.log("hey")
+
 
     //with iteration
     // var pingPongs = pingOrPong($("input").val());
 
     //with recursion
-    tableTennis(1, $("input").val());
-    var pingPongs = hackyReturn;
+
+    var pingPongs = tableTennis(1, $("input").val(), []);
 
     //put resulting array into li elements (this is the liOption)
 
@@ -37,13 +37,10 @@ $(function() {
 
   //busyness
 
-  function tableTennis(start, end) {
+  function tableTennis(start, end, result) {
     //input test
 
-    //only make result array on the first pass
-    if (start === 1) {
-      result = [];
-    }
+    end = parseInt(end);
 
     //basic logic
     if (start % 3 === 0 && start % 5 === 0) {
@@ -58,12 +55,12 @@ $(function() {
 
     // recursive condition
     if (start < end) {
-      tableTennis(start + 1, end);
+      return tableTennis(start + 1, end, result);
     }
 
     // if it is the top of the stack, store the result array in a global variable. Can't do return result because it is recursion.
-    if (start === end - 1){
-      hackyReturn = result;
+    if (start === end ){
+      return result
     }
 
   }
