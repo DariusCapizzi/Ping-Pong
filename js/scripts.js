@@ -5,15 +5,27 @@ $(function() {
   $("form").submit(function(e) {
     e.preventDefault();
 
+    //reset fields
+    $("ul").empty()
+    $("h4").text("pingpong");
+
+    if (/\D/.test($("input").val())) {
+      $("h4").text("hey, one number only");
+      return;
+    }
+
+    console.log("hey")
+
     //with iteration
     // var pingPongs = pingOrPong($("input").val());
 
     //with recursion
-    var pingPongs = tableTennis(1, $("input").val());
+    tableTennis(1, $("input").val());
+    var pingPongs = hackyReturn;
 
     //put resulting array into li elements (this is the liOption)
 
-    $("ul").empty()
+
     for (i = 0; i < pingPongs.length; i++) {
       $("ul").append('<li > </li>');
       $("li:last").text(pingPongs[i])
@@ -27,11 +39,6 @@ $(function() {
 
   function tableTennis(start, end) {
     //input test
-    $("h4").text("pingpong");
-
-    if (/\D/.test(end)) {
-      $("h4").text("hey, one number only");
-    }
 
     //only make result array on the first pass
     if (start === 1) {
@@ -54,10 +61,9 @@ $(function() {
       tableTennis(start + 1, end);
     }
 
-
+    // if it is the top of the stack, store the result array in a global variable. Can't do return result because it is recursion.
     if (start === end - 1){
-      debugger;
-      return result;
+      hackyReturn = result;
     }
 
   }
@@ -71,13 +77,6 @@ $(function() {
 
   function pingOrPong(number) {
     //input test
-    $("h4").text("pingpong")
-
-    if (/\D/.test(number)) {
-      $("h4").text("hey, one number only")
-    }
-
-
     result = [];
 
     // basic iterative logic, ..return array? yes sure
@@ -93,15 +92,8 @@ $(function() {
       }
     }
 
-    //empty the list before we put stuff in
-    $("ul").empty()
-
-
     return result
 
-
-
-    // for every li made, put a new results[i] in it, targets just the last li
 
   }
 
